@@ -1,10 +1,12 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
+import { Observable } from 'rxjs';
 import { firstValueFrom } from 'rxjs';
 
 interface UsersGrpcClient {
-  FindById(data: { id: string }): any;
-  CreateUser(data: { name: string; email: string }): any;
+  FindById(data: { id: string }): Observable<any>;
+  CreateUser(data: { name: string; email: string }): Observable<any>;
+  FindAllUsers(data: any): Observable<any>;
 }
 
 @Injectable()
@@ -17,11 +19,15 @@ export class UsersService implements OnModuleInit {
     this.grpcClient = this.client.getService<UsersGrpcClient>('UsersService');
   }
 
-  findById(id: string) {
+  async findById(id: string): Promise<any> {
     return firstValueFrom(this.grpcClient.FindById({ id }));
   }
 
-  createUser(name: string, email: string) {
+  async createUser(name: string, email: string): Promise<any> {
     return firstValueFrom(this.grpcClient.CreateUser({ name, email }));
+  }
+
+  async findAllUsers(): Promise<any> {
+    return firstValueFrom(this.grpcClient.FindAllUsers({}));
   }
 }

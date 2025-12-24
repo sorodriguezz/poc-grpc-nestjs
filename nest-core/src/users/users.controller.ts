@@ -9,12 +9,16 @@ export class UsersController {
 
   @GrpcMethod('UsersService', 'FindById')
   findById(data: { id: string }) {
-    console.log(data);
     return this.service.findById(data.id);
   }
 
   @GrpcMethod('UsersService', 'CreateUser')
   createUser({ name, email }: CreateUserDto) {
     return this.service.create(name, email);
+  }
+
+  @GrpcMethod('UsersService', 'FindAllUsers')
+  findAllUsers(): any {
+    return this.service.findAllUsers();
   }
 }

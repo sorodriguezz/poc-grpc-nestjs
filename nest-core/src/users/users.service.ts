@@ -18,4 +18,9 @@ export class UsersService {
     const user = this.repo.create({ name, email });
     return this.repo.save(user);
   }
+
+  async findAllUsers() {
+    const users = await this.repo.find();
+    return { users };
+  }
 }

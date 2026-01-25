@@ -6,7 +6,7 @@ Proof of Concept de arquitectura de microservicios utilizando gRPC para comunica
 
 ```
 ┌─────────────┐      HTTP/REST     ┌─────────────┐      gRPC       ┌──────────────┐
-│   Cliente   │ ─────────────────▶ │   BFF/API   │ ──────────────▶│ Microservicio│
+│   Cliente   │ ─────────────────▶ │   BFF/API   │ ──────────────▶ │ Microservicio│
 │  (Postman)  │                    │   Gateway   │                 │     Core     │
 └─────────────┘                    │  (nest-bff) │                 │  (nest-core) │
                                    └─────────────┘                 └──────┬───────┘
